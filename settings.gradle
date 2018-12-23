@@ -1,0 +1,4 @@
+println("settings start")
+//server
+include ':api', ':pojo', ':server4jService', ':server4jWeb',':dao'
+println("settings end")
