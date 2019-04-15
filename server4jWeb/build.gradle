@@ -5,17 +5,46 @@ apply plugin: "org.springframework.boot"
 apply plugin: "de.fuerstenau.buildconfig"
 apply plugin: "jacoco"
 
-apply plugin: "com.bmuschko.docker-remote-api"
-docker{
-    registryCredentials {
-        username = project.findProperty("dockerHubUsername")
-        password = project.findProperty("dockerHubPassword")
-    }
-}
+apply from:"${rootProject.getRootDir().getAbsolutePath()}/script/util.gradle"
 
 // Define version
-
 version = "1.0"
+
+apply plugin: "com.bmuschko.docker-remote-api"
+docker {
+    registryCredentials {
+        (username, password)=getKeyStoreProperties(['dockerHubUsername','dockerHubPassword'])
+        println("hawksjamesf ${username} / ${password}")
+    }
+}
+import com.bmuschko.gradle.docker.tasks.image.*
+
+task dockerfile(type: Dockerfile) {
+    from 'openjdk:8'
+    maintainer 'hawks jamesf'
+    exposePort 8080
+    addFile "${bootJar.archiveName}", '.'
+    entryPoint 'java', '-jar', "${bootJar.archiveName}"
+//    instruction { "HEALTHCHECK --interval=5s CMD curl -I --fail http://localhost:8080/actuator/health || exit 1" }
+}
+
+task copyBootJarToDockerImageDirectory(type: Copy) {
+    dependsOn bootJar
+    from bootJar.archivePath
+    into dockerfile.destFile.parentFile
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn dockerfile, copyBootJarToDockerImageDirectory, check
+    inputDir dockerfile.destFile.parentFile
+    tag = "hawksjamesf/spacecraft-server:${project.version}"
+}
+
+task pushImage(type: DockerPushImage) {
+    dependsOn buildImage
+    conventionMapping.imageName = { buildImage.getTag() }
+}
+
 // Set JVM targets
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
@@ -38,29 +67,115 @@ buildConfig {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(path: ':api')
+//    compile project(path: ':api')
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     //spring boot start
-    implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot:$springBootVersion"
+
+    //    implementation "org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion"
+//    /**
+//     * no sql数据库连接
+//     */
+//    implementation("org.springframework.boot:spring-boot-starter-data-cassandra:$springBootVersion")
+//    implementation("org.springframework.boot:spring-boot-starter-data-couchbase:$springBootVersion")
+//    implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch:$springBootVersion")
+//    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-neo4j:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-solr:$springBootVersion"
+//    /**
+//     * sql数据库连接
+//     */
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    implementation("org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion")
-    implementation("org.springframework.session:spring-session-jdbc:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-aop:$springBootVersion")
+//    implementation "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
+
+
+    /**
+     * logging
+     */
+//    implementation "org.springframework.boot:spring-boot-starter-log4j2:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-logging:$springBootVersion"
+
+    /**
+     * templates
+     */
+//    implementation "org.springframework.boot:spring-boot-starter-data-freemarker:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-groovy-templates:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-mustache:$springBootVersion"
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
+
+    /**
+     * loader
+     */
+    implementation("org.springframework.boot:spring-boot-loader:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-loader-tools:$springBootVersion")
+
+    /**
+     * configuration
+     */
+    implementation("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-configuration-metadata:$springBootVersion")
+    /**
+     * ops
+     */
+//    implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-actuator-docs:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-activemq:$springBootVersion"
+//
+//    implementation "org.springframework.boot:spring-boot-starter-amqp:$springBootVersion"
+//    implementation("org.springframework.boot:spring-boot-starter-aop:$springBootVersion")
+//    implementation("org.springframework.boot:spring-boot-starter-artemis:$springBootVersion")
+    /**
+     * io
+     */
+    implementation("org.springframework.boot:spring-boot-starter-batch:$springBootVersion")
+
+    /**
+     * others
+     */
+//    implementation "org.springframework.boot:spring-boot-starter-webmvc:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-webflux:$springBootVersion"
-    implementation("org.springframework.boot:spring-boot-starter-webmvc:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-web-services:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-websocket:$springBootVersion")
+    implementation "org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
     runtimeOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+
+//
+//    implementation "org.springframework.boot:spring-boot-starter-mail:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-mobile:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-social-facebook:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-social-linkedin:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-social-twitter:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
+//
+//
+//    implementation "org.springframework.boot:spring-boot-starter-jersey:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-jetty:$springBootVersion"
+//
+//    implementation "org.springframework.boot:spring-boot-starter-jooq:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-jta-atomikos:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-jta-narayana:$springBootVersion"
+////
+//    implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
+//    
+//    implementation("org.springframework.boot:spring-boot-starter-cache:$springBootVersion")
+//    implementation("org.springframework.boot:spring-boot-starter-cloud-connectors:$springBootVersion")
+    /**
+     * test
+     */
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.springframework.boot:spring-boot-test:$springBootVersion"
+    testImplementation "org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion"
+    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
     //security
 //    implementation("org.springframework.security:spring-security-web:$springFrameworkVersion")
 //    implementation("org.springframework.security:spring-security-config:$springFrameworkVersion")
 //    implementation("org.springframework.security:spring-security-cas:$springFrameworkVersion")
-    //spring boot end
 //    api "org.springframework:spring-context:$springFrameworkVersion"
 //    api "org.springframework:spring-beans:$springFrameworkVersion"
 //    api "org.springframework:spring-webmvc:$springFrameworkVersion"
@@ -76,7 +191,7 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.54'
     //rpc框架
     // https://mvnrepository.com/artifact/com.alibaba/dubbo
-    compile group: 'com.alibaba', name: 'dubbo', version: '2.5.3'
+//    compile group: 'com.alibaba', name: 'dubbo', version: '2.5.3'
 
 
 //    implementation("org.slf4j:slf4j-log4j12:1.6.4")

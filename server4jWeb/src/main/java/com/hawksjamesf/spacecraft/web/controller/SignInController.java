@@ -1,9 +1,9 @@
-package com.hawksjamesf.spacecraft.web;
+package com.hawksjamesf.spacecraft.web.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * Copyright ® $ 2017
@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class SignInController {
-//
-//    @GetMapping("/")
-//    public String index() {
-//        return "Hello World";
-//    }
+    // inject via application.properties
+    @Value("${welcome.message:test}")
+    private String message = "Hello World";
+
+    @GetMapping("/")
+    public String index() {
+        return "Hello World";
+    }
 
     @PostMapping("/signIn")
     public String signIn(@RequestBody String info) {
@@ -37,12 +40,14 @@ public class SignInController {
     }
 
     @GetMapping("404")
-    public String handleError(){
+    public String handleError() {
         return "404"; // 这里返回的是文件名，这里会展示 404.html
     }
 
-    @GetMapping("/greeting")
-    public String greeting(){
+    @RequestMapping("/greeting")
+    public String greeting(Map<String, Object> model) {
+        model.put("name", message);
+//        model.addAttribute("name", name);
         return "greeting"; // 这里返回的是文件名，这里会展示 404.html
     }
 
