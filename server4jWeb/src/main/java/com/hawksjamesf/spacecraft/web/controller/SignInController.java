@@ -23,10 +23,10 @@ public class SignInController {
     @Value("${errorMsg:unknown}")
     private String errorMsg;
 
-//    @GetMapping("/")
-//    public String index() {
-//        return "Hello World";
-//    }
+    @GetMapping({"/","index.html"})
+    public String index() {
+        return "index";
+    }
 
     @PostMapping("/signIn")
     public String signIn(@RequestBody String info) {
