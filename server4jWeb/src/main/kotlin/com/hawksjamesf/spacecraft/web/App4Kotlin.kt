@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.server.router
  * @since: Dec/18/2018  Tue
  */
 fun main(args: Array<String>) {
-    runApplication<App4Kotlin>(*args)
+//    runApplication<App4Kotlin>(*args)
     SpringApplication.run(App4Kotlin::class.java,*args)
 }
 

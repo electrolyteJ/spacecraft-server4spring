@@ -87,7 +87,7 @@ dependencies {
 //    /**
 //     * sql数据库连接
 //     */
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
 //    implementation "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
 
 
@@ -102,7 +102,7 @@ dependencies {
      */
 //    implementation "org.springframework.boot:spring-boot-starter-data-freemarker:$springBootVersion"
 //    implementation "org.springframework.boot:spring-boot-starter-data-groovy-templates:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-mustache:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-mustache:$springBootVersion"
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
 
     /**

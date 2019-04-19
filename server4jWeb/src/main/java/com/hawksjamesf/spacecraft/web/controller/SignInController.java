@@ -1,6 +1,7 @@
 package com.hawksjamesf.spacecraft.web.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,16 +13,20 @@ import java.util.Map;
  * @author: hawks.jamesf
  * @since: Dec/20/2018  Thu
  */
-@RestController
+@Controller
+//@ResponseBody
+//@RestController
 public class SignInController {
     // inject via application.properties
     @Value("${welcome.message:test}")
-    private String message = "Hello World";
+    private String message;
+    @Value("${errorMsg:unknown}")
+    private String errorMsg;
 
-    @GetMapping("/")
-    public String index() {
-        return "Hello World";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "Hello World";
+//    }
 
     @PostMapping("/signIn")
     public String signIn(@RequestBody String info) {
@@ -39,16 +44,17 @@ public class SignInController {
         return "sign out successfully";
     }
 
-    @GetMapping("404")
-    public String handleError() {
-        return "404"; // 这里返回的是文件名，这里会展示 404.html
+    @GetMapping("/handleError")
+    public String handleError(Map<String, Object> model) {
+        model.put("errorMsg", errorMsg);
+        return "error";
     }
 
     @RequestMapping("/greeting")
     public String greeting(Map<String, Object> model) {
         model.put("name", message);
 //        model.addAttribute("name", name);
-        return "greeting"; // 这里返回的是文件名，这里会展示 404.html
+        return "greeting";
     }
 
 

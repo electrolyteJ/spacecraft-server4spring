@@ -1,7 +1,9 @@
 package com.hawksjamesf.spacecraft.web;
 
+import com.hawksjamesf.spacecraft.web.config.MyConfig;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -21,7 +23,7 @@ public class App {
         ConfigurableApplicationContext appContext = app.run(args);
         ApplicationArguments applicationArguments = appContext.getBean(ApplicationArguments.class);
         System.out.println("name:" + applicationArguments.getOptionNames());
-        System.out.println("values:"+applicationArguments.getOptionValues("developer.name"));
+        System.out.println("values:" + applicationArguments.getOptionValues("developer.name"));
 
     }
 

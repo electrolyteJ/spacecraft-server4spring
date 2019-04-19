@@ -5,12 +5,10 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven {
-            url "https://jitpack.io"
-            url "https://maven.aliyun.com/repository/jcenter"
-        }
+        maven { url "https://jitpack.io" }
         maven { url = uri "https://repo.spring.io/milestone" }
         maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
     ext {
         //server
@@ -20,7 +18,7 @@ buildscript {
 
 //        grpcVersion='1.17.1'
 //        grpcVersion='1.16.1'
-        grpcVersion='1.14.0'
+        grpcVersion = '1.14.0'
 //
     }
     dependencies {
@@ -46,13 +44,10 @@ allprojects {
     repositories {
         jcenter()
         google()
-        maven {
-            url "https://jitpack.io"
-            url "https://maven.aliyun.com/repository/jcenter"
-
-        }
+        maven { url "https://jitpack.io" }
         maven { url = uri "https://repo.spring.io/milestone" }
         maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
 }
 

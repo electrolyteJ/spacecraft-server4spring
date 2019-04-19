@@ -1,0 +1,9 @@
+#server:
+#  port: 8081
+
+profile:
+  userId: 1
+  maps: { k1: v1 , k2: v2}
+  lists:
+    - e0
+    - e1
