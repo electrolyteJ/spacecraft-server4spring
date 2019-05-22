@@ -1,6 +1,7 @@
 package com.hawksjamesf.spacecraft;
 
 import com.hawksjamesf.spacecraft.lifecycle.*;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -16,6 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author: jf.chen
  * @since: Dec/18/2018  Tue
  */
+//@MapperScan(value = "com.hawksjamesf.storage")
 @SpringBootApplication
 public class App {
     public static void main(String... args) {
