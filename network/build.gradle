@@ -49,8 +49,8 @@ buildConfig {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api "org.jetbrains.kotlin:kotlin-stdlib:+"
-    api "org.jetbrains.kotlin:kotlin-reflect:+"
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.41"
+//    api "org.jetbrains.kotlin:kotlin-reflect:+"
 //    api 'com.google.protobuf:protobuf-lite:3.0.0'
     ///non-Android platform
     api "io.grpc:grpc-netty-shaded:${grpcVersion}"
@@ -61,4 +61,6 @@ dependencies {
 //    api 'io.grpc:grpc-okhttp:1.17.1'
 //    api 'io.grpc:grpc-protobuf-lite:1.17.1'
 //    api 'io.grpc:grpc-stub:1.17.1'
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+    compile 'io.springfox:springfox-swagger-ui:2.9.2'
 }
