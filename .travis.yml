@@ -1,2 +1,6 @@
 language: java
-script: mvn package -DskipTests
+jdk: oraclejdk8
+
+script:
+  - ./gradlew clean
+  - ./gradlew build

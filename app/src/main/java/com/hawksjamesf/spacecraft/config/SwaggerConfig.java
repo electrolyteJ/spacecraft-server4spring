@@ -1,7 +1,7 @@
 package com.hawksjamesf.spacecraft.config;
 
 import com.google.common.collect.Sets;
-import org.springframework.context.annotation.Bean;w
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
