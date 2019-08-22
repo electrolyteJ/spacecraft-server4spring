@@ -47,7 +47,10 @@ def getKeyStoreProperties(List<String> keysets) {
             //在local.properties中存在
             def properties = new Properties()
             def file = rootProject.file('local.properties')
-            if (file == null) return
+            if (!file.exists()){
+                file = new File("${rootProject.rootDir}${File.separator}local.properties")
+                file.createNewFile()
+            }
             properties.load(file.newDataInputStream())
             for (String s : keysets) {
                 values.add(properties.getProperty(s))
