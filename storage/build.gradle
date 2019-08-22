@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
-//apply plugin: "kotlin-spring"
-//apply plugin: "kotlin-jpa"
+apply plugin: "kotlin-spring"
+apply plugin: "kotlin-jpa"
 apply plugin: "org.springframework.boot"
 
 // Define version
@@ -20,34 +20,35 @@ buildConfig {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.41"
-//    api "org.jetbrains.kotlin:kotlin-reflect:+"
+    api project(path: ":common")
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
     /**
      * no sql数据库连接
      */
-//    implementation("org.springframework.boot:spring-boot-starter-data-cassandra:$springBootVersion")
-//    implementation("org.springframework.boot:spring-boot-starter-data-cassandra-reactive:$springBootVersion")
-//    implementation("org.springframework.boot:spring-boot-starter-data-couchbase:$springBootVersion")
-//    implementation("org.springframework.boot:spring-boot-starter-data-couchbase-reactive:$springBootVersion")
-//    implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch:$springBootVersion")
-//    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-data-neo4j:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-data-redis-reactive:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-data-solr:$springBootVersion"
+    implementation("org.springframework.boot:spring-boot-starter-data-cassandra:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-cassandra-reactive:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-couchbase:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-couchbase-reactive:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch:$springBootVersion")
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-neo4j:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis-reactive:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-solr:$springBootVersion"
     /**
      * sql数据库连接
      */
-//    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
-    api "org.springframework.boot:spring-boot-starter-data-jdbc:$springBootVersion"
+    api "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+//    api "org.springframework.boot:spring-boot-starter-data-jdbc:$springBootVersion"
     api "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
-    api group: 'com.alibaba', name: 'druid', version: '1.1.16'
+    api 'com.alibaba:druid:1.1.16'
 
 
     api("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1")
-//    implementation "org.springframework.boot:spring-boot-starter-data-ldap:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-ldap:$springBootVersion"
     annotationProcessor group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
     /**

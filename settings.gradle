@@ -4,3 +4,5 @@ include ':app',':storage','network'
 //':api', ':pojo'
 
 println("settings end")
+include 'common'
+
