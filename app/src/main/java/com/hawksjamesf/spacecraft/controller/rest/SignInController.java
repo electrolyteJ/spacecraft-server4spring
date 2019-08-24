@@ -1,11 +1,15 @@
 package com.hawksjamesf.spacecraft.controller.rest;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Map;
 
 import static java.awt.SystemColor.info;
@@ -61,6 +65,8 @@ import static java.awt.SystemColor.info;
 public class SignInController {
     @Value("${errorMsg:unknown}")
     private String errorMsg;
+    @Autowired
+    DataSource dataSource;
 
     @ApiOperation(value = "登入用户", notes = "登入用户")
 //    @ResponseStatus(HttpStatus.UPDATE)
@@ -68,6 +74,13 @@ public class SignInController {
     public String signIn(@RequestBody Map<String, Object> model) {
         String name = (String) model.get("name");
         String pwd = (String) model.get("password");
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("connetct:"+connection);
         return "sign in successfully:" + info;
     }
 

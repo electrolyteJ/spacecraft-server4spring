@@ -1,6 +1,5 @@
-package com.hawksjamesf.spacecraft;
+package com.hawkajamesf.spacecraft;
 
-import com.hawksjamesf.spacecraft.lifecycle.*;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,17 +12,12 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author: jf.chen
  * @since: Dec/18/2018  Tue
  */
+//@MapperScan(value = "com.hawksjamesf.storage")
 @SpringBootApplication
 public class App {
     public static void main(String... args) {
         SpringApplication app = new SpringApplication(App.class);
 //        app.setWebApplicationType(WebApplicationType.NONE);
-        app.addListeners(new StartingAppListener());
-        app.addListeners(new ContextAppListener());
-        app.addListeners(new PreparedAppListener());
-        app.addListeners(new EnvironmentPreparedAppListener());
-        app.addListeners(new ReadyAppListener());
-        app.addListeners(new FailedAppListener());
         ConfigurableApplicationContext appContext = app.run(args);
         ApplicationArguments applicationArguments = appContext.getBean(ApplicationArguments.class);
         System.out.println("name:" + applicationArguments.getOptionNames());

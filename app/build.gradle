@@ -66,15 +66,8 @@ buildConfig {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    compile project(path: ':api')
     implementation project(path: ':storage')
     implementation project(path: ':network')
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    //spring boot start
-    implementation "org.springframework.boot:spring-boot:$springBootVersion"
-
-    //    implementation "org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion"
 
     /**
      * templates
@@ -118,7 +111,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
     runtimeOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+//    implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
 
 //
 //    implementation "org.springframework.boot:spring-boot-starter-mail:$springBootVersion"
@@ -146,7 +139,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
     testImplementation "org.springframework.boot:spring-boot-test:$springBootVersion"
     testImplementation "org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion"
-    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
+//    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
     //security
 //    implementation("org.springframework.security:spring-security-web:$springFrameworkVersion")
 //    implementation("org.springframework.security:spring-security-config:$springFrameworkVersion")
@@ -158,8 +151,6 @@ dependencies {
 //    api "org.springframework:spring-aspects:$springFrameworkVersion"
 //    api "org.springframework:spring-context-support:$springFrameworkVersion"
 //    testCompile "org.springframework:spring-test:$springFrameworkVersion"
-    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
-    annotationProcessor group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     //spring end
     api "com.h2database:h2:1.4.196"
     api "io.jsonwebtoken:jjwt:0.9.0"

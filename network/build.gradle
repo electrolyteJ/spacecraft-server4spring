@@ -51,8 +51,6 @@ buildConfig {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(path: ":common")
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 //    api 'com.google.protobuf:protobuf-javalite:3.7.0'
     api 'com.google.protobuf:protobuf-lite:3.0.0'
     ///non-Android platform
@@ -70,4 +68,5 @@ dependencies {
     //rpc框架
     // https://mvnrepository.com/artifact/com.alibaba/dubbo
 //    compile group: 'com.alibaba', name: 'dubbo', version: '2.5.3'
+
 }
