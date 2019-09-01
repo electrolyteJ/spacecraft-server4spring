@@ -1,0 +1,39 @@
+{
+  "eventType": "bugly_tag",
+  "timestamp": 1462780713515,
+  "isEncrypt": 0,
+  "eventContent": {
+    "datas": [
+      {
+        "tagId": 12972, //tagId
+        "tagName": "testTag2", //tag名称
+        "crashCount": 21, //crash次数
+        "crashUser": 20, //crash用户数
+        "type": 2, //tag类型,1为sdk上设置上报,2为页面手动设置
+        "url": "http://bugly.qq.com/search?app=1104512706&pid=1&ptag=1017-10000&ver=all&bi=all&cl=all&ct=all&s=all&dt=all&tl=12972"
+      },
+      {
+        "tagId": 15019,
+        "tagName": "testTag1",
+        "crashCount": 66,
+        "crashUser": 64,
+        "type": 2,
+        "url": "http://bugly.qq.com/search?app=1104512706&pid=1&ptag=1017-10000&ver=all&bi=all&cl=all&ct=all&s=all&dt=all&tl=12972"
+      },
+      {
+        "tagId": 15120,
+        "tagName": "testTag",
+        "crashCount": 1430,
+        "crashUser": 1423,
+        "type": 2,
+        "url": "http://bugly.qq.com/search?app=1104512706&pid=1&ptag=1017-10000&ver=all&bi=all&cl=all&ct=all&s=all&dt=all&tl=12972"
+      }
+    ],
+    "appId": "1104512706",
+    "platformId": 1,
+    "appName": "AF", //app名称
+    "date": "20160508",
+    "appUrl": "http://bugly.qq.com/issueIndex?app=1104512706&pid=1&ptag=1005-10000"
+  },
+  "signature": "ACE346A4AE13A23A52A0D0D19350B466AF51728A"
+}

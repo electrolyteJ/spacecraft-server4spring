@@ -4,11 +4,11 @@ apply plugin: "kotlin-jpa"
 apply plugin: "org.springframework.boot"
 apply plugin: "de.fuerstenau.buildconfig"
 apply plugin: "jacoco"
-
 apply from:"${rootProject.getRootDir().getAbsolutePath()}/script/util.gradle"
 
+
 // Define version
-version = "1.0"
+version = "2.2"
 
 apply plugin: "com.bmuschko.docker-remote-api"
 docker {
@@ -34,6 +34,7 @@ task copyBootJarToDockerImageDirectory(type: Copy) {
     into dockerfile.destFile.parentFile
 }
 
+
 task buildImage(type: DockerBuildImage) {
     dependsOn dockerfile, copyBootJarToDockerImageDirectory, check
     inputDir dockerfile.destFile.parentFile
@@ -57,11 +58,16 @@ buildConfig {
     // Settings
 
     packageName = "com.hawksjamesf.spacecraft"
-
     // Fields
 
     // Note: Provide a 'jwtSigningKey' project property containing a 512-bit base64 encoded string in case you want to customize the JWT signing key
     buildConfigField 'String', 'JWT_SIGNING_KEY', project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ=="
+}
+springBoot {
+    mainClassName = 'com.hawksjamesf.spacecraft.App'
+}
+bootJar {
+    mainClassName = 'com.hawksjamesf.spacecraft.App'
 }
 
 dependencies {
@@ -105,7 +111,6 @@ dependencies {
      */
 //    implementation "org.springframework.boot:spring-boot-starter-webmvc:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-webflux:$springBootVersion"
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-web-services:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-websocket:$springBootVersion")
     implementation "org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion"
