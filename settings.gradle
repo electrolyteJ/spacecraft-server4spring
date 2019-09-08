@@ -5,4 +5,5 @@ include ':app',':storage','network'
 
 println("settings end")
 include 'common'
+include 'flyway'
 
