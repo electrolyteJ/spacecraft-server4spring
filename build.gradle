@@ -8,20 +8,6 @@ buildscript {
         maven { url "https://jitpack.io" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://plugins.gradle.org/m2/' }
-//        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter/' }
-//        maven { url "https://maven.aliyun.com/repository/public/" }
-//
-//        all { ArtifactRepository repo ->
-//            if (repo instanceof MavenArtifactRepository) {
-//                def url = repo.url.toString()
-//
-//                if (url.startsWith('https://repo.maven.apache.org/maven2/') || url.startsWith('https://repo.maven.org/maven2') || url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com/')) {
-//                    //project.logger.lifecycle "Repository ${repo.url} replaced by $REPOSITORY_URL."
-//                    remove repo
-//                }
-//            }
-//        }
     }
     ext {
         //server
@@ -53,19 +39,6 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://plugins.gradle.org/m2/' }
-//        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter/' }
-//        maven{ url 'https://maven.aliyun.com/repository/public/'}
-//
-//        all { ArtifactRepository repo ->
-//            if (repo instanceof MavenArtifactRepository) {
-//                def url = repo.url.toString()
-//                if (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com/')) {
-//                    //project.logger.lifecycle "Repository ${repo.url} replaced by $REPOSITORY_URL."
-//                    remove repo
-//                }
-//            }
-//        }
     }
 
 }
