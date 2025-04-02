@@ -5,13 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-/**
- * Copyright ® $ 2017
- * All right reserved.
- *
- * @author: jf.chen
- * @since: Dec/18/2018  Tue
- */
 //@MapperScan(value = "com.hawksjamesf.storage")
 @SpringBootApplication
 public class App {

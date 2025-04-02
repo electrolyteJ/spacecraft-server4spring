@@ -8,14 +8,6 @@ import okio.buffer
 import okio.source
 import java.io.InputStream
 
-
-/**
- * Copyright ® $ 2017
- * All right reserved.
- *
- * @author: hawks.jamesf
- * @since: Aug/13/2019  Tue
- */
 class JsonUnitTest : TestCase() {
 
     lateinit var inputStream: InputStream

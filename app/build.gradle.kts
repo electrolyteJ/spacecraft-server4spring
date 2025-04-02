@@ -1,66 +1,54 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("kapt") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    kotlin("plugin.jpa") version "1.9.25"
-    kotlin("plugin.serialization") version "1.9.25"
-    id("org.springframework.boot") version "3.4.4"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.protobuf") version "0.8.6"
-    id("de.fuerstenau.buildconfig") version "1.1.8"
-    id("com.bmuschko.docker-remote-api") version "9.4.0"
+    kotlin("jvm")
+    kotlin("kapt")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
+    kotlin("plugin.serialization")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+//    id("com.google.protobuf") version "0.9.5"
+//    id("de.fuerstenau.buildconfig") version "1.1.8"
+//    id("com.bmuschko.docker-remote-api") version "9.4.0"
+//    jacoco
 }
 
-apply plugin: "de.fuerstenau.buildconfig"
-apply plugin: "jacoco"
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
 
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-protobuf {
-    protoc {
-        // You still need protoc like in the non-Android case
-        artifact = 'com.google.protobuf:protoc:3.7.1'
-//        path = '/usr/local/Cellar/protobuf/3.7.1'
-    }
-    plugins {
-        javalite {
-            // The codegen for lite comes as a separate artifact
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
-        }
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.0.0-pre2'
-//            artifact = "io.grpc:protoc-gen-grpc-java:${rootProject.ext.grpcVersion}"
-        }
-    }
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                // In most cases you don't need the full Java output
-                // if you use the lite output.
-                remove java
-            }
-            task.plugins {
-                javalite {}
-                grpc {
-                    // Options added to --grpc_out
-                    option 'lite'
-                }
-            }
-        }
-    }
-}
+val springBootVersion = "2.0.0.M7"
+val springFrameworkVersion = "5.1.3.RELEASE"
+val grpcVersion = "1.14.0"
+//protobuf {
+//    protoc {
+//        // You still need protoc like in the non-Android case
+//        artifact = 'com.google.protobuf:protoc:3.7.1'
+////        path = '/usr/local/Cellar/protobuf/3.7.1'
+//    }
+//    plugins {
+//        javalite {
+//            // The codegen for lite comes as a separate artifact
+//            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+//        }
+//        grpc {
+//            artifact = 'io.grpc:protoc-gen-grpc-java:1.0.0-pre2'
+////            artifact = "io.grpc:protoc-gen-grpc-java:${rootProject.ext.grpcVersion}"
+//        }
+//    }
+//    generateProtoTasks {
+//        all().each { task ->
+//            task.builtins {
+//                // In most cases you don't need the full Java output
+//                // if you use the lite output.
+//                remove java
+//            }
+//            task.plugins {
+//                javalite {}
+//                grpc {
+//                    // Options added to --grpc_out
+//                    option "lite"
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 //apply plugin: "com.bmuschko.docker-remote-api"
@@ -99,26 +87,26 @@ protobuf {
 //    conventionMapping.imageName = { buildImage.getTag() }
 //}
 
-buildConfig {
+//buildConfig {
 
     // Settings
 
-    packageName = "com.electrolytej.spacecraft"
+//    packageName = "com.electrolytej.spacecraft"
     // Fields
 
     // Note: Provide a 'jwtSigningKey' project property containing a 512-bit base64 encoded string in case you want to customize the JWT signing key
-    buildConfigField 'String', 'JWT_SIGNING_KEY', project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ=="
-    buildConfigField 'String', 'env_jdbc_driver', project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ=="
-    buildConfigField 'String', 'env_jdbc_url', project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ=="
-    buildConfigField 'String', 'env_jdbc_username', project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ=="
-    buildConfigField 'String', 'env_jdbc_password', "123456"
-}
-springBoot {
-    mainClassName = 'com.electrolytej.spacecraft.App'
-}
-bootJar {
-    mainClassName = 'com.electrolytej.spacecraft.App'
-}
+//    buildConfigField("String", "JWT_SIGNING_KEY", project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ==")
+//    buildConfigField("String", "env_jdbc_driver", project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ==")
+//    buildConfigField("String", "env_jdbc_url", project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ==")
+//    buildConfigField("String", "env_jdbc_username", project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ==")
+//    buildConfigField("String", "env_jdbc_password", "123456")
+//}
+//springBoot {
+//    mainClassName = 'com.electrolytej.spacecraft.App'
+//}
+//bootJar {
+//    mainClassName = 'com.electrolytej.spacecraft.App'
+//}
 //configurations.each { c ->
 //    c.resolutionStrategy.dependencySubstitution.all { DependencySubstitution dependency ->
 //        if (dependency.requested.group == 'org.webjars.npm') {
@@ -129,8 +117,8 @@ bootJar {
 //}
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+//    implementation(fileTree(include: ['*.jar'], dir: 'libs'))
+    implementation(project(":common"))
     /**
      * loader
      */
@@ -158,11 +146,11 @@ dependencies {
      * others
      */
 //    implementation "org.springframework.boot:spring-boot-starter-webmvc:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-webflux:$springBootVersion"
+    implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-web-services:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-websocket:$springBootVersion")
-    implementation "org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
+    implementation("org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
     runtimeOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 //    implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
 //    implementation "org.springframework.boot:spring-boot-starter-mail:$springBootVersion"
@@ -187,9 +175,9 @@ dependencies {
     /**
      * test
      */
-    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testImplementation "org.springframework.boot:spring-boot-test:$springBootVersion"
-    testImplementation "org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion"
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-test:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion")
 //    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
     //security
 //    implementation("org.springframework.security:spring-security-web:$springFrameworkVersion")
@@ -203,27 +191,28 @@ dependencies {
 //    api "org.springframework:spring-context-support:$springFrameworkVersion"
 //    testCompile "org.springframework:spring-test:$springFrameworkVersion"
     //spring end
-    api "com.h2database:h2:1.4.196"
-    api "io.jsonwebtoken:jjwt:0.9.0"
+    api("com.h2database:h2:1.4.196")
+    api("io.jsonwebtoken:jjwt:0.9.0")
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation("junit:junit:4.12")
 //    api 'com.google.protobuf:protobuf-javalite:3.7.0'
-    api 'com.google.protobuf:protobuf-lite:3.0.0'
+    api("com.google.protobuf:protobuf-lite:3.0.0")
 //    api("com.squareup.moshi:moshi:1.8.0")
 //    api 'com.squareup.moshi:moshi-adapters:1.8.0'
 //    api("com.squareup.moshi:moshi-kotlin:1.8.0")
 //    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
     ///non-Android platform
-    api "io.grpc:grpc-netty-shaded:${grpcVersion}"
-    api "io.grpc:grpc-protobuf:${grpcVersion}"
-    api "io.grpc:grpc-stub:${grpcVersion}"
-    api "javax.annotation:javax.annotation-api:1.3.1"
+    api("io.grpc:grpc-netty-shaded:${grpcVersion}")
+    api("io.grpc:grpc-protobuf:${grpcVersion}")
+    api("io.grpc:grpc-stub:${grpcVersion}")
+    api("javax.annotation:javax.annotation-api:1.3.1")
     //Android platform
 //    api 'io.grpc:grpc-okhttp:1.17.1'
 //    api 'io.grpc:grpc-protobuf-lite:1.17.1'
 //    api 'io.grpc:grpc-stub:1.17.1'
-    api 'io.springfox:springfox-swagger2:2.9.2'
-    api 'io.springfox:springfox-swagger-ui:2.9.2'
+    api("io.springfox:springfox-swagger2:2.9.2")
+
+    api("io.springfox:springfox-swagger-ui:2.9.2")
 
     //rpc框架
     // https://mvnrepository.com/artifact/com.alibaba/dubbo
@@ -240,18 +229,18 @@ dependencies {
 //    api "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
 //    api "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springBootVersion"
 //    api "org.springframework.boot:spring-boot-starter-data-neo4j:$springBootVersion"
-    api "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
-    api "org.springframework.boot:spring-boot-starter-data-redis-reactive:$springBootVersion"
+    api("org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion")
+    api("org.springframework.boot:spring-boot-starter-data-redis-reactive:$springBootVersion")
 //    api "org.springframework.boot:spring-boot-starter-data-solr:$springBootVersion"
     /**
      * sql数据库连接
      */
-    api "org.springframework.boot:spring-boot-starter-data-ldap:$springBootVersion"
-    api "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+    api("org.springframework.boot:spring-boot-starter-data-ldap:$springBootVersion")
+    api("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
 //    api "org.springframework.boot:spring-boot-starter-data-jdbc:$springBootVersion"
-    api "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
-    api group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
-    api 'com.alibaba:druid-spring-boot-starter:1.1.17'
+    api("org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion")
+    api("mysql:mysql-connector-java:8.0.17")
+    api("com.alibaba:druid-spring-boot-starter:1.1.17")
     api("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1")
 
     /**
@@ -264,9 +253,13 @@ dependencies {
     /**
      * test
      */
-    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testImplementation "org.springframework.boot:spring-boot-test:$springBootVersion"
-    testImplementation "org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion"
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-test:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
 
+
+
 }
+
+

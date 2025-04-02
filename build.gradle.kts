@@ -18,6 +18,20 @@ buildscript {
     }
 }
 
+plugins {
+    kotlin("jvm") version "1.9.25"
+    kotlin("kapt") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
+    kotlin("plugin.jpa") version "1.9.25"
+    kotlin("plugin.serialization") version "1.9.25"
+    id("org.springframework.boot") version "3.4.4"
+    id("io.spring.dependency-management") version "1.1.7"
+//    id("com.google.protobuf") version "0.9.5"
+//    id("de.fuerstenau.buildconfig") version "1.1.8"
+//    id("com.bmuschko.docker-remote-api") version "9.4.0"
+//    jacoco
+}
+
 allprojects {
     repositories {
         google()
@@ -26,4 +40,19 @@ allprojects {
         maven { url = uri("https://repo.spring.io/milestone" ) }
         gradlePluginPortal()
     }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+    //java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(17)
+//    }
+//}
+//
+//kotlin {
+//    compilerOptions {
+//        freeCompilerArgs.addAll("-Xjsr305=strict")
+//    }
+//}
 }

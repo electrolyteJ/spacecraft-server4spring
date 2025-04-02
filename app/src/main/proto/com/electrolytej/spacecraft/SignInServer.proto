@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.electrolytej.spacecraft;
+//option java_package = "com.hawksjamesf.api";
+option java_outer_classname = "SignInServer";
+
+import "com/electrolytej/SigninModel.proto";
+import "com/electrolytej/Profile.proto";
+
+service ISignInService {
+    rpc signIn (com.electrolytej.spacecraft.SignInReq) returns (com.electrolytej.spacecraft.SignInReq) {
+        //        option (method) = "post";
+    }
+
+}
+service ISignUpService {
+    rpc signUp (com.electrolytej.spacecraft.SignUpReq) returns (com.electrolytej.spacecraft.SignUpReq) {
+    }
+}
+
+service ISignOutService {
+}
+

@@ -1,4 +1,4 @@
-package com.electrolytej.spacecraft.config;
+package com.electrolytej.spacecraft.network.config;
 
 import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    public static final String api="com.hawksjamesf.spacecraft.controller";
+    public static final String api="com.electrolytej.spacecraft.controller";
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
