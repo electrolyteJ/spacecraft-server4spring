@@ -1,9 +1,10 @@
 plugins {
-    kotlin("jvm")
-    kotlin("kapt")
-    kotlin("plugin.spring")
-    kotlin("plugin.jpa")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.kotlin.jpa)
+    alias(libs.plugins.kotlin.serialization)
+//    alias(libs.plugins.kotlin.allopen)
     id("org.springframework.boot")
     id("io.spring.dependency-management")
 //    id("com.google.protobuf") version "0.9.5"
@@ -13,7 +14,7 @@ plugins {
 }
 
 
-val springBootVersion = "2.0.0.M7"
+val springBootVersion = "3.4.4"
 val springFrameworkVersion = "5.1.3.RELEASE"
 val grpcVersion = "1.14.0"
 //protobuf {
@@ -101,12 +102,12 @@ val grpcVersion = "1.14.0"
 //    buildConfigField("String", "env_jdbc_username", project.findProperty("jwtSigningKey") ?: "KkYtSmFOZFJnVWtYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlxM3M2djl5JEImRSlIQE1jUWZUalduWnI0dTd3IQ==")
 //    buildConfigField("String", "env_jdbc_password", "123456")
 //}
-//springBoot {
-//    mainClassName = 'com.electrolytej.spacecraft.App'
-//}
-//bootJar {
-//    mainClassName = 'com.electrolytej.spacecraft.App'
-//}
+springBoot {
+    mainClassName = 'com.electrolytej.spacecraft.App'
+}
+bootJar {
+    mainClassName = 'com.electrolytej.spacecraft.App'
+}
 //configurations.each { c ->
 //    c.resolutionStrategy.dependencySubstitution.all { DependencySubstitution dependency ->
 //        if (dependency.requested.group == 'org.webjars.npm') {
@@ -118,19 +119,14 @@ val grpcVersion = "1.14.0"
 
 dependencies {
 //    implementation(fileTree(include: ['*.jar'], dir: 'libs'))
-    implementation(project(":common"))
+//    implementation(project(":common"))
+    api("org.springframework.boot:spring-boot:$springBootVersion")
     /**
      * loader
      */
     implementation("org.springframework.boot:spring-boot-loader:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-loader-tools:$springBootVersion")
 
-    /**
-     * configuration
-     */
-    implementation("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-configuration-metadata:$springBootVersion")
     /**
      * ops
      */
@@ -172,13 +168,7 @@ dependencies {
 //    
 //    implementation("org.springframework.boot:spring-boot-starter-cache:$springBootVersion")
 //    implementation("org.springframework.boot:spring-boot-starter-cloud-connectors:$springBootVersion")
-    /**
-     * test
-     */
-    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testImplementation("org.springframework.boot:spring-boot-test:$springBootVersion")
-    testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion")
-//    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
+
     //security
 //    implementation("org.springframework.security:spring-security-web:$springFrameworkVersion")
 //    implementation("org.springframework.security:spring-security-config:$springFrameworkVersion")
@@ -193,30 +183,7 @@ dependencies {
     //spring end
     api("com.h2database:h2:1.4.196")
     api("io.jsonwebtoken:jjwt:0.9.0")
-
-    testImplementation("junit:junit:4.12")
-//    api 'com.google.protobuf:protobuf-javalite:3.7.0'
-    api("com.google.protobuf:protobuf-lite:3.0.0")
-//    api("com.squareup.moshi:moshi:1.8.0")
-//    api 'com.squareup.moshi:moshi-adapters:1.8.0'
-//    api("com.squareup.moshi:moshi-kotlin:1.8.0")
-//    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
-    ///non-Android platform
-    api("io.grpc:grpc-netty-shaded:${grpcVersion}")
-    api("io.grpc:grpc-protobuf:${grpcVersion}")
-    api("io.grpc:grpc-stub:${grpcVersion}")
     api("javax.annotation:javax.annotation-api:1.3.1")
-    //Android platform
-//    api 'io.grpc:grpc-okhttp:1.17.1'
-//    api 'io.grpc:grpc-protobuf-lite:1.17.1'
-//    api 'io.grpc:grpc-stub:1.17.1'
-    api("io.springfox:springfox-swagger2:2.9.2")
-
-    api("io.springfox:springfox-swagger-ui:2.9.2")
-
-    //rpc框架
-    // https://mvnrepository.com/artifact/com.alibaba/dubbo
-//    compile group: 'com.alibaba', name: 'dubbo', version: '2.5.3'
 
     /**
      * no sql数据库连接
@@ -257,8 +224,46 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-test:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
+    testImplementation("junit:junit:4.12")
 
+    //    api 'javax.servlet:servlet-api:2.5'
+    /**
+     * mvc
+     */
+//    implementation "org.springframework.boot:spring-boot-starter-data-freemarker:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-data-groovy-templates:$springBootVersion"
+//    implementation "org.springframework.boot:spring-boot-starter-mustache:$springBootVersion"
+    api("org.springframework.boot:spring-boot-starter-tomcat:1.5.7.RELEASE")
+    api("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
+    api("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    api("org.webjars:react:16.5.2")
+    api("org.webjars.npm:react:16.8.5")
+    api("org.webjars.npm:js-tokens:3.0.2")
+    api("org.webjars.npm:react-dom:16.8.5")
+    api("org.webjars.bower:babel:5.8.38")
+    api("org.webjars:bootstrap:4.3.1")
+    api("org.webjars:jquery:3.4.0")
+    api("org.webjars:webjars-locator:0.30")
+    api("joda-time:joda-time:2.10")
 
+    /**
+     * network
+     */
+    api("io.springfox:springfox-swagger2:2.9.2")
+    api("io.springfox:springfox-swagger-ui:2.9.2")
+    //    api 'com.google.protobuf:protobuf-javalite:3.7.0'
+    api("com.google.protobuf:protobuf-lite:3.0.0")
+//    api("com.squareup.moshi:moshi:1.8.0")
+//    api 'com.squareup.moshi:moshi-adapters:1.8.0'
+//    api("com.squareup.moshi:moshi-kotlin:1.8.0")
+//    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+    ///non-Android platform
+    api("io.grpc:grpc-netty-shaded:${grpcVersion}")
+    api("io.grpc:grpc-protobuf:${grpcVersion}")
+    api("io.grpc:grpc-stub:${grpcVersion}")
+    //rpc框架
+    // https://mvnrepository.com/artifact/com.alibaba/dubbo
+//    compile group: 'com.alibaba', name: 'dubbo', version: '2.5.3'
 
 }
 
