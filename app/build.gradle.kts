@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.kapt)
@@ -103,10 +105,10 @@ val grpcVersion = "1.14.0"
 //    buildConfigField("String", "env_jdbc_password", "123456")
 //}
 springBoot {
-    mainClassName = "com.electrolytej.spacecraft.App"
+    mainClass = "com.electrolytej.spacecraft.App"
 }
-bootJar {
-    mainClassName = "com.electrolytej.spacecraft.App"
+tasks.getByName<BootJar>("bootJar") {
+    mainClass = "com.electrolytej.spacecraft.App"
 }
 //configurations.each { c ->
 //    c.resolutionStrategy.dependencySubstitution.all { DependencySubstitution dependency ->
