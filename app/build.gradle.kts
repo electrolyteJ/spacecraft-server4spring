@@ -103,10 +103,10 @@ val grpcVersion = "1.14.0"
 //    buildConfigField("String", "env_jdbc_password", "123456")
 //}
 springBoot {
-    mainClassName = 'com.electrolytej.spacecraft.App'
+    mainClassName = "com.electrolytej.spacecraft.App"
 }
 bootJar {
-    mainClassName = 'com.electrolytej.spacecraft.App'
+    mainClassName = "com.electrolytej.spacecraft.App"
 }
 //configurations.each { c ->
 //    c.resolutionStrategy.dependencySubstitution.all { DependencySubstitution dependency ->
