@@ -1,18 +1,23 @@
 server:
   port: 8081
 spring:
-  profiles:
-    active: dev
+  config:
+    activate:
+      on-profile: dev
 ---
 server.port: 8080
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
 
 debug: true
 ---
 server.port: 8083
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
 #userprofile:
 #  userId: 1                     #    - e0
 #  maps: { k1: v1 , k2: v2}      #    - e1

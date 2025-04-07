@@ -157,8 +157,8 @@ dependencies {
 //    implementation "org.springframework.boot:spring-boot-starter-social-facebook:$springBootVersion"
 //    implementation "org.springframework.boot:spring-boot-starter-social-linkedin:$springBootVersion"
 //    implementation "org.springframework.boot:spring-boot-starter-social-twitter:$springBootVersion"
-//    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
-//
+    implementation("org.springframework.boot:spring-boot-starter-validation:$springBootVersion")
+    implementation("javax.validation:validation-api:+")
 //
 //    implementation "org.springframework.boot:spring-boot-starter-jersey:$springBootVersion"
 //    implementation "org.springframework.boot:spring-boot-starter-jetty:$springBootVersion"
@@ -226,7 +226,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-test:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:$springBootVersion")
-    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
+//    testImplementation("org.springframework.boot:spring-boot-junit-runners:$springBootVersion")
     testImplementation("junit:junit:4.12")
 
     //    api 'javax.servlet:servlet-api:2.5'
