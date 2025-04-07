@@ -108,6 +108,7 @@ springBoot {
     mainClass = "com.electrolytej.spacecraft.App"
 }
 tasks.getByName<BootJar>("bootJar") {
+    enabled = false
     mainClass = "com.electrolytej.spacecraft.App"
 }
 //configurations.each { c ->
